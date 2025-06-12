@@ -1,3 +1,11 @@
 print("Hello, world!")
 x = 10
 print(x)
+
+
+// should print positive number 
+if x > 0:
+<INDENT>
+    print("Positive number")
+
+<DEDENT>

@@ -6,10 +6,12 @@ class ToyPythonSemanticListener(ToyPythonListener):
         self.variables = {}
 
     def exitSimpleStatement(self, ctx:ToyPythonParser.SimpleStatementContext):
-        if ctx.getChildCount() == 3 and ctx.getChild(1).getText() == "=":
+        # Assignment: IDENTIFIER '=' expression NEWLINE (childCount == 4)
+        if ctx.getChildCount() == 4 and ctx.getChild(1).getText() == "=":
             var_name = ctx.getChild(0).getText()
             value = self._eval_expression(ctx.getChild(2))
             self.variables[var_name] = value
+        # Print: 'print' '(' expression ')' NEWLINE (childCount == 5)
         elif ctx.getChild(0).getText() == "print":
             expr_ctx = ctx.getChild(2)
             value = self._eval_expression(expr_ctx)
@@ -21,7 +23,6 @@ class ToyPythonSemanticListener(ToyPythonListener):
             return int(ctx.NUMBER().getText())
         # If it's a string
         if hasattr(ctx, 'STRING') and ctx.STRING():
-            # Remove the quotes
             text = ctx.STRING().getText()
             return text[1:-1]
         # If it's a variable/identifier
