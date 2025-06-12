@@ -66,6 +66,13 @@ def main():
         print("Parsed successfully!")
         print("Parse Tree:")
         print(tree.toStringTree(recog=parser))  # Print the parse tree
+
+        # Walk the tree with the semantic listener
+        from ToyPythonSemanticListener import ToyPythonSemanticListener
+        walker = ParseTreeWalker()
+        semantic_listener = ToyPythonSemanticListener()
+        walker.walk(semantic_listener, tree)
+
     except Exception as e:
         print(f"Error during parsing: {e}")
         sys.exit(1)
