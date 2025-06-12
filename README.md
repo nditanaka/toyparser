@@ -6,9 +6,9 @@ ToyPython is a minimal Python-like interpreter built with [ANTLR4](https://www.a
 
 ## What’s Included
 
-- **ToyPython.g4** – The main ANTLR grammar for the language.
-- **ToyPythonLexer.py / ToyPythonParser.py / ToyPythonListener.py** – ANTLR-generated Python files (do not edit).
-- **ToyPythonSemanticListener.py** – Custom Python code for interpreting your ToyPython code.
+- **ToyPython.g4** – The ANTLR grammar for the language.
+- **ToyPythonLexer.py / ToyPythonParser.py / ToyPythonListener.py** – ANTLR-generated Python files.
+- **ToyPythonSemanticListener.py** – Custom Python code for interpreting ToyPython code.
 - **main.py** – Preprocesses input for indentation, runs the parser, and executes the code.
 - **example.toy** – An example ToyPython program.
 
@@ -49,13 +49,101 @@ ToyPython is a minimal Python-like interpreter built with [ANTLR4](https://www.a
 
 ---
 
-## Example ToyPython Code
+## Example Inputs & Outputs
+
+### Printing, Assignment, and If Statement
+
+**Input:**
 
 ```
 x = 5
+print("Hello, world!")
 if x > 0:
-    print("Positive number")
+    print("x is positive")
+print(x)
+```
+
+**Output:**
+
+```
+Parsed successfully!
+Parse Tree:
+(program (statement ...) ...)
+Hello, world!
+x is positive
+5
+```
+
+---
+
+### String Assignment, String Concatenation, and Comparison
+
+**Input:**
+
+```
+name = "Alice"
+score = 10
+if score >= 10:
+    print("Congratulations " + name)
+print("End of program")
+```
+
+**Output:**
+
+```
+Parsed successfully!
+Parse Tree:
+(program (statement ...) ...)
+Congratulations Alice
+End of program
+```
+
+---
+
+### Arithmetic Expressions and Comparison
+
+**Input:**
+
+```
+a = 3
+b = 7
+print(a + b)
+if a < b:
+    print("a is less than b")
+print("Finished")
+```
+
+**Output:**
+
+```
+Parsed successfully!
+Parse Tree:
+(program (statement ...) ...)
+10
+a is less than b
+Finished
+```
+
+---
+
+### If Condition That Fails
+
+**Input:**
+
+```
+x = 0
+if x != 0:
+    print("Nonzero")
 print("Done")
+```
+
+**Output:**
+
+```
+Parsed successfully!
+Parse Tree:
+(program (statement ...) ...)
+Done
 ```
 
 ---
@@ -67,4 +155,4 @@ print("Done")
 
 ---
 
-**Yay! Have fun experimenting with this tiny version of Python.**
+**That’s it! Have fun experimenting with your own tiny Python.**
