@@ -153,17 +153,11 @@ Done
 
 ---
 
-### Blank Lines and Indentation
-
-Your grammar now supports blank lines between and inside blocks, so you won't see parse errors for extra newlines.
-
----
-
 ## Extending
 
-- To add more language features, edit `ToyPython.g4` and update `ToyPythonSemanticListener.py`.
-- If you add grammar rules, re-run ANTLR as above.
+- To add more language features, we would need to edit `ToyPython.g4` and update `ToyPythonSemanticListener.py`.
+- If we add grammar rules, re-run ANTLR as above.
 
 ---
 
-**That’s it! Have fun experimenting with your own tiny Python.**
+**That’s it! Have fun experimenting with tiny Python.**
