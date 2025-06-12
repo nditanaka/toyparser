@@ -1,0 +1,60 @@
+grammar ToyPython;
+
+program
+    : statement+ EOF
+    ;
+
+statement
+    : simpleStatement
+    | compoundStatement
+    ;
+
+simpleStatement
+    : 'print' '(' expression ')' NEWLINE
+    | IDENTIFIER '=' expression NEWLINE
+    | 'return' expression NEWLINE
+    ;
+
+compoundStatement
+    : 'if' comparison ':' NEWLINE INDENT statement+ DEDENT
+    | 'while' comparison ':' NEWLINE INDENT statement+ DEDENT
+    | 'def' IDENTIFIER '(' parameters? ')' ':' NEWLINE INDENT statement+ DEDENT
+    ;
+
+parameters
+    : IDENTIFIER (',' IDENTIFIER)*
+    ;
+
+comparison
+    : expression (('<' | '>' | '==' | '!=' | '<=' | '>=') expression)?
+    ;
+
+expression
+    : term (('+' | '-') term)*
+    ;
+
+term
+    : factor (('*' | '/') factor)*
+    ;
+
+factor
+    : NUMBER
+    | STRING
+    | IDENTIFIER
+    | '(' expression ')'
+    | IDENTIFIER '(' arguments? ')'
+    ;
+
+arguments
+    : expression (',' expression)*
+    ;
+
+NEWLINE: '\r'? '\n';
+INDENT: '<INDENT>';
+DEDENT: '<DEDENT>';
+NUMBER: [0-9]+;
+STRING: '"' (~["\\] | '\\' .)* '"';
+IDENTIFIER: [a-zA-Z_][a-zA-Z_0-9]*;
+
+WS: [ \t]+ -> skip;
+COMMENT: '#' ~[\r\n]* -> channel(HIDDEN);
