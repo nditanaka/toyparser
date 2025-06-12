@@ -67,4 +67,4 @@ print("Done")
 
 ---
 
-**That’s it! Have fun experimenting with your own tiny Python.**
+**Yay! Have fun experimenting with this tiny version of Python.**
