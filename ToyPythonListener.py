@@ -26,6 +26,15 @@ class ToyPythonListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ToyPythonParser#emptyStatement.
+    def enterEmptyStatement(self, ctx:ToyPythonParser.EmptyStatementContext):
+        pass
+
+    # Exit a parse tree produced by ToyPythonParser#emptyStatement.
+    def exitEmptyStatement(self, ctx:ToyPythonParser.EmptyStatementContext):
+        pass
+
+
     # Enter a parse tree produced by ToyPythonParser#simpleStatement.
     def enterSimpleStatement(self, ctx:ToyPythonParser.SimpleStatementContext):
         pass

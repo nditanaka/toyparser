@@ -51,13 +51,18 @@ grammar ToyPython;
 }
 
 // Parser Rules
+
 program
-    : statement+ EOF
+    : (statement | emptyStatement)+ EOF
     ;
 
 statement
     : simpleStatement
     | compoundStatement
+    ;
+
+emptyStatement
+    : NEWLINE
     ;
 
 simpleStatement
@@ -66,7 +71,7 @@ simpleStatement
     ;
 
 compoundStatement
-    : 'if' comparison ':' NEWLINE INDENT statement+ DEDENT
+    : 'if' comparison ':' NEWLINE INDENT (statement | emptyStatement)+ DEDENT
     ;
 
 comparison
@@ -89,6 +94,7 @@ factor
     ;
 
 // Lexer Rules
+
 NEWLINE: '\r'? '\n';
 INDENT: '<INDENT>';
 DEDENT: '<DEDENT>';

@@ -36,8 +36,13 @@ ToyPython is a minimal Python-like interpreter built with [ANTLR4](https://www.a
 2. (Only if you edit `ToyPython.g4`) Regenerate parser files:
 
    ```sh
-   antlr4 -Dlanguage=Python3 ToyPython.g4
+   java -jar antlr-4.13.2-complete.jar -Dlanguage=Python3 ToyPython.g4
    ```
+
+   This will generate (or update) files like:
+   - `ToyPythonLexer.py`
+   - `ToyPythonParser.py`
+   - `ToyPythonListener.py`
 
 3. Run the example:
 
@@ -68,7 +73,7 @@ print(x)
 ```
 Parsed successfully!
 Parse Tree:
-(program (statement ...) ...)
+(program (statement (simpleStatement x = (expression (term (factor 5))) \n)) (statement (simpleStatement print ( (expression (term (factor "Hello, world!"))) ) \n)) (statement (compoundStatement if (comparison (expression (term (factor x))) > (expression (term (factor 0)))) : \n <INDENT> (statement (simpleStatement print ( (expression (term (factor "x is positive"))) ) \n)) <DEDENT>)) (statement (simpleStatement print ( (expression (term (factor x))) ) \n)) <EOF>)
 Hello, world!
 x is positive
 5
@@ -93,7 +98,7 @@ print("End of program")
 ```
 Parsed successfully!
 Parse Tree:
-(program (statement ...) ...)
+(program (statement (simpleStatement name = (expression (term (factor "Alice"))) \n)) (statement (simpleStatement score = (expression (term (factor 10))) \n)) (statement (compoundStatement if (comparison (expression (term (factor score))) >= (expression (term (factor 10)))) : \n <INDENT> (statement (simpleStatement print ( (expression (term (factor "Congratulations ") + (term (factor name)))) ) \n)) <DEDENT>)) (statement (simpleStatement print ( (expression (term (factor "End of program"))) ) \n)) <EOF>)
 Congratulations Alice
 End of program
 ```
@@ -118,7 +123,7 @@ print("Finished")
 ```
 Parsed successfully!
 Parse Tree:
-(program (statement ...) ...)
+(program (statement (simpleStatement a = (expression (term (factor 3))) \n)) (statement (simpleStatement b = (expression (term (factor 7))) \n)) (statement (simpleStatement print ( (expression (term (factor a) + (term (factor b)))) ) \n)) (statement (compoundStatement if (comparison (expression (term (factor a))) < (expression (term (factor b)))) : \n <INDENT> (statement (simpleStatement print ( (expression (term (factor "a is less than b"))) ) \n)) <DEDENT>)) (statement (simpleStatement print ( (expression (term (factor "Finished"))) ) \n)) <EOF>)
 10
 a is less than b
 Finished
@@ -142,9 +147,15 @@ print("Done")
 ```
 Parsed successfully!
 Parse Tree:
-(program (statement ...) ...)
+(program (statement (simpleStatement x = (expression (term (factor 0))) \n)) (statement (compoundStatement if (comparison (expression (term (factor x))) != (expression (term (factor 0)))) : \n <INDENT> (statement (simpleStatement print ( (expression (term (factor "Nonzero"))) ) \n)) <DEDENT>)) (statement (simpleStatement print ( (expression (term (factor "Done"))) ) \n)) <EOF>)
 Done
 ```
+
+---
+
+### Blank Lines and Indentation
+
+Your grammar now supports blank lines between and inside blocks, so you won't see parse errors for extra newlines.
 
 ---
 
